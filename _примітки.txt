@@ -12,4 +12,4 @@ npm run build (кінцева компіляція файлів з ресурс�
 cd c:\OSPanel
 cd domains
 cd localhost
-cd photoservice
+cd photoservice2.0
