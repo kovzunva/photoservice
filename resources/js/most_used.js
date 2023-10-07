@@ -198,3 +198,21 @@ document.getElementById('btn_url_img').addEventListener('click', function() {
   }
 });
 }
+
+// ентер на кнопку у текстових полях
+document.addEventListener('DOMContentLoaded', function() {
+  const enterBtnInputs = document.querySelectorAll('.enter_btn');
+
+  enterBtnInputs.forEach(input => {
+      input.addEventListener('keydown', function(event) {
+          if (event.key === 'Enter') {
+              event.preventDefault();
+              const btnId = 'btn_' + input.id;
+              const EnterButton = document.getElementById(btnId);
+              if (EnterButton) {
+                  EnterButton.click(); // Викликаємо обробник кнопки
+              }
+          }
+      });
+  });
+});

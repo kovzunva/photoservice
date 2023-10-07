@@ -20,5 +20,17 @@
 				Додати пост
 			</button>
 		</a>
+        <div>
+            @foreach ($posts as $post)
+                <a href="profile/post/{{$post->id}}">                    
+                    <div class="mb-3">
+                        <h5>{{$post->name}}</h5>
+                        <div class="img_preview">
+                            <img src="{{$post->img}}" alt="">
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+        </div>
     </div>	
 @endsection	

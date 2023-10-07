@@ -15,16 +15,18 @@ class PostController extends Controller
     
     public function showAll(Request $request, $page=1){
         $posts = Post::orderBy('created_at', 'desc')->get();
+        foreach ($posts as $post) {
+            $post->img = HelperController::getImg('post',$post->id);
+        }
         $paginator = HelperController::paginator($posts,'postPage',$page,3);
 
-        return view('client.posts', 
+        return view('client.main-page', 
         [
             'posts' => $paginator['data'],
             'paginator' => $paginator['paginator'],
             'title' => "Пости",
         ]);
     }
-
 
     public function emptyForm(){
         return view('client.post-form', 
@@ -61,7 +63,7 @@ class PostController extends Controller
 
 
         if ($error!='') return redirect()->back()->with('error', $error);
-        else return redirect()->route('my-profile')->with('success', 'Пост успішно створено!');
+        else return redirect()->route('post',['id'=> $post->id])->with('success', 'Пост успішно створено!');
     }
 
     public function show($id){
@@ -102,7 +104,7 @@ class PostController extends Controller
                     $error .= 'Помилка при обробці зображення. ';
                 }
 
-                return redirect()->route('my-profile')->with('success', 'Зміни внесено успішно.');
+                return redirect()->route('post',['id'=> $post->id])->with('success', 'Зміни внесено успішно.');
             }
             catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Помилка при збереженні змін.');

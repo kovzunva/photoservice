@@ -27,7 +27,6 @@ class Post extends Model
 
     public function likes()
     {
-        return $this->hasMany(Like::class, 'item_id')
-            ->where('item_type', 'Item');
+        return $this->hasMany(Like::class);
     }
 }
