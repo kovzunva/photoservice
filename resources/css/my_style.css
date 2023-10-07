@@ -566,6 +566,10 @@ img{
     width: 100%;
 }
 
+.img_preview{
+    width: 200px;
+}
+
 .logo_img{
     width: 28px;
 }

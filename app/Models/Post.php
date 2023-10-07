@@ -8,17 +8,12 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Item extends Model
+class Post extends Model
 {
     use CrudTrait;
     use HasFactory;
 
-    protected $fillable = ['name', 'price', 'description', 'category_id'];
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+    protected $fillable = ['name', 'about', 'user_id'];
 
     public function user()
     {

@@ -1,175 +1,128 @@
 <?php
 
-// app/Http/Controllers/BlogController.php
+// app/Http/Controllers/postController.php
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Blog;
-use App\Models\BlogCategory;
+use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\HelperController;
 use Carbon\Carbon;
 
-class BlogController extends Controller
+class PostController extends Controller
 {
-    public function paginate(Request $request, $table)
-    {
-        // Отримуємо кількість записів на сторінку (якщо вказано)
-        $perPage = $request->input('per_page', 2);
-
-        // Вибираємо дані з вказаної таблиці та робимо пагінацію
-        $data = DB::table($table)->paginate($perPage);
-
-        return $data;
-    }
     
     public function showAll(Request $request, $page=1){
-        $query = Blog::orderBy('created_at', 'desc');
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        $paginator = HelperController::paginator($posts,'postPage',$page,3);
 
-        $selectedCategory = new BlogCategory();
-        if ($request->has('category')) {
-            $categoryFilter = $request->input('category');
-            if ($categoryFilter === 'all') $selectedCategory->name = 'Всі категорії';
-            elseif ($categoryFilter === '') {
-                $query->where('category_id', '');
-                $selectedCategory->name = 'Інше';
-            }
-            else {
-                $query->where('category_id', $categoryFilter);
-                $selectedCategory = BlogCategory::find($request->input('category'));
-            }
-        }
-
-        $selectedDateFrom = null;
-        $selectedDateTo = null;
-        try{
-            if ($request->has('date_from') && $request->input('date_from')!='') {
-                $dateFromFilter = $request->input('date_from');
-                $carbonDate = Carbon::createFromFormat('d.m.Y', $dateFromFilter)->format('d.m.Y');
-                if ($carbonDate==$dateFromFilter){
-                    $dateFromFilter = Carbon::createFromFormat('d.m.Y', $dateFromFilter)->format('Y-m-d');
-                    $query->whereDate('created_at', '>=', $dateFromFilter);
-                    $selectedDateFrom = Carbon::createFromFormat('Y-m-d', $dateFromFilter)->format('d.m.Y');
-                }
-            }
-        }
-        catch(\Exception $e){}
-        try{
-            if ($request->has('date_to') && $request->input('date_to')!='') {
-                $dateToFilter = $request->input('date_to');
-                $carbonDate = Carbon::createFromFormat('d.m.Y', $dateToFilter)->format('d.m.Y');
-                if ($carbonDate==$dateToFilter){
-                    $dateToFilter = Carbon::createFromFormat('d.m.Y', $dateToFilter)->format('Y-m-d');
-                    $query->whereDate('created_at', '<=', $dateToFilter);
-                    $selectedDateTo = Carbon::createFromFormat('Y-m-d', $dateToFilter)->format('d.m.Y');
-                }
-            }
-        }
-        catch(\Exception $e){}
-
-        $blogs = $query->get();
-        $paginator = HelperController::paginator($blogs,'blogPage',$page,3);        
-        $categories = BlogCategory::orderBy('name')->get();
-
-        return view('client.blogs', 
+        return view('client.posts', 
         [
-            'blogs' => $paginator['data'],
+            'posts' => $paginator['data'],
             'paginator' => $paginator['paginator'],
-            'categories' => $categories,
-            // фільтри
-            'selectedCategory' => $selectedCategory,
-            'selectedDateFrom' => $selectedDateFrom,
-            'selectedDateTo' => $selectedDateTo,
-            'title' => "Блоги",
-        ]);
-    }
-
-    public function usersBlogs(){
-        $userId = auth()->user()->id;
-        $blogs = Blog::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
-
-        return view('client.my-blogs', [
-            'blogs' => $blogs,
-            'title' => "Блоги користувача",
+            'title' => "Пости",
         ]);
     }
 
 
     public function emptyForm(){
-        $categories = BlogCategory::orderBy('name')->get();
-        return view('client.blog-form', 
+        return view('client.post-form', 
         [
-            'blog' => null,
-            'categories' => $categories,
-            'title' => "Додавання блогу",
+            'post' => null,
+            'title' => "Додавання Посту",
         ]);
     }
 
     public function add(Request $request){
         $error = '';
         try {
-            $blog = Blog::create([
-                'title' => $request['title'],
-                'content' => $request['content'],
-                'category_id' => $request['category_id'],
+            $post = Post::create([
+                'name' => $request['name'],
+                'about' => $request['about'],
                 'user_id' => auth()->id(),
             ]);
         }
-        catch (\Exception $e) {
+        catch (Exception $e) {
             $error = 'Помилка при вставці даних. ';
+        }
+
+        // Картинка
+        try{
+            $img = $request->input('img_pass');
+            if ($img){
+                $mes = HelperController::saveImg($img,'post',$post->id);
+                if ($mes!='') $error .= $mes.' ';
+            }
+        }
+        catch (\Exception $e) {
+            $error .= 'Помилка при обробці зображення. ';
         }
 
 
         if ($error!='') return redirect()->back()->with('error', $error);
-        else return redirect()->route('blog', ['id' => $blog->id])->with('success', 'Блог успішно створено!');
+        else return redirect()->route('my-profile')->with('success', 'Пост успішно створено!');
     }
 
     public function show($id){
-        $blog = Blog::findOrFail($id);
+        $post = Post::findOrFail($id);
+        $img = HelperController::getImg('post',$post->id);
 
-        return view('client.blog', [
-            'blog' => $blog,
-            'title' => 'Літературний блог',
+        return view('client.post', [
+            'post' => $post,
+            'img' => $img,
+            'title' => 'Пост',
         ]);
     }
 
     public function edit(Request $request, $id){
-        $blog = Blog::findOrFail($id);
+        $post = Post::findOrFail($id);
 
-        if (!$blog) {
-            return redirect()->back()->with('error', 'Блог не знайдено.');
+        if (!$post) {
+            return redirect()->back()->with('error', 'Пост не знайдено.');
         }
-
+        $error = '';
         if ($request->isMethod('post')) {
             try {
-                $blog->update([
-                    'title' => $request->input('title'),
-                    'content' => $request->input('content'),
-                    'category_id' => $request->input('category_id'),
+                $post->update([
+                    'name' => $request['name'],
+                    'about' => $request['about'],
                 ]);
 
-                return redirect()->route('blog', ['id' => $blog->id])->with('success', 'Зміни внесено успішно.');
+                // Картинка
+                try{
+                    $img = $request->input('img_pass');
+                    if ($img){
+                        HelperController::delImg(HelperController::getImg('post',$post->id));
+                        $mes = HelperController::saveImg($img,'post',$post->id);
+                        if ($mes!='') $error .= $mes.' ';
+                    }
+                }
+                catch (\Exception $e) {
+                    $error .= 'Помилка при обробці зображення. ';
+                }
+
+                return redirect()->route('my-profile')->with('success', 'Зміни внесено успішно.');
             }
             catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Помилка при збереженні змін.');
             }
         }
         else {
-            $categories = BlogCategory::orderBy('name')->get();
-            return view('client.blog-form', [
-                'blog' => $blog,
-                'categories' => $categories,
-                'title' => "Редагування блогу",
+            $img_edit = HelperController::getImg('post',$post->id);
+            return view('client.post-form', [
+                'post' => $post,
+                'img_edit' => $img_edit,
+                'title' => "Редагування Посту",
             ]);
         }
     }
 
     public function destroy($id){
-        $blog = Blog::findOrFail($id);
-        $blog->delete();
+        $post = Post::findOrFail($id);
+        $post->delete();
 
-        return redirect()->route('my-blogs')->with('success', 'Блог успішно видалено!');
+        return redirect()->route('my-posts')->with('success', 'Пост успішно видалено!');
     }   
 }
 

@@ -110,56 +110,23 @@ class HelperController extends Controller
         return $imgs;
     }
 
+    public static function getImg($folder,$id){
+        $img_id = $id;
+        $sid=str_pad($img_id, 8, "0", STR_PAD_LEFT);                              //формуємо маску для пошуку існуючих ілюстрацій для книги
+        $pattern='images/'.$folder.'/'.$sid.'*.*';
+        $i=0;
+        $imgs = null;
+        foreach (glob($pattern) as $filename){
+            $imgs[$i] = $filename;
+            $i=$i+1;
+        }
+        if ($imgs) return $imgs[0];
+        else return null;
+    }
+
     public static function delImg($del_img){
         unlink($del_img);     
     }
-
-    // public function paginator($data, $page, $on_page, $num_links, $url){
-    //     if ($count_pages > 1) {       //якщо є лише одна сторінка пейджинг не виводиться
-
-    //         $cur_page = ($p==-1) ? ceil($start_row/$on_page) : $p;      //розраховуєм номер поточної сторінки
-         
-    //              //номер лінка стартової сторінки пейджинга
-    //         $start = (($cur_page - $num_links) > 1) ? $cur_page - $num_links : 1;
-    //              //номер лінка останньої сторінки
-    //         $end   = (($cur_page + $num_links) < $count_pages) ? $cur_page + $num_links : $count_pages;
-         
-    //         $output= '<span class="ways">';
-         
-    //         //Формуємо посилання на першу сторінку
-    //         if  ($cur_page > ($num_links+1)){
-    //            $output .= '<a href="'.route($url, [1]).$params.'" title="Перша"> << </a>';
-    //         }  
-    //         //на попередню сторінку
-    //         if  ($cur_page != 1){
-    //            $output .= '<a href="'.route($url, [$cur_page-1]).$params.'" title="Попередня"><</a>';
-    //         }
-    //         // Формуємо список сторінок з врахуванням стартової і останньої
-    //         for ($loop = $start; $loop <= $end; $loop++){
-    //            if ($cur_page == $loop)
-    //            {               
-    //               $output .= '<span>'.$loop.' </span>';        //поточна сторінка
-    //            }
-    //            else
-    //            {
-    //                  $output .= '<a href="'.route($url, [$loop]).$params.'">'.$loop.'</a>';
-    //            }
-    //         }  
-    //         //посилання на наступну сторінку
-    //         if ($cur_page < $count_pages){
-    //            $output .= '<a href="'.route($url, [$cur_page+1]).$params.'" title="Наступна">></a>';
-    //         }
-         
-    //         //на останню сторінку
-    //         if (($cur_page + $num_links) < $count_pages){
-    //            $output .= '<a href="'.route($url, [$count_pages]).$params.'" title="Остання"> >> </a> <I>('.$count_pages.')</I>';
-    //         }
-         
-    //         $output .= '</span>';
-    //         $text.= '<div class="wrapPaging">'.$output.'</div>';
-    //      }
-    // }
-
     public static function paginator($data, $url, $page=1, $on_page=10, $num_links=2, $params='') {   
         if ($on_page>=count($data)) return [
             'data' => $data,

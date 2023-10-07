@@ -15,8 +15,10 @@
             </div>
         @endif
         
-        <ul>					
-            <li><a href="/profile/blogs">Мої блоги</a></li>
-        </ul>
+		<a href="/profile/post">
+			<button class="transparent-btn mb-3">
+				Додати пост
+			</button>
+		</a>
     </div>	
 @endsection	

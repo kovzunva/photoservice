@@ -6,10 +6,6 @@ export default defineConfig({
         laravel([
             'resources/css/my_style.css',
             'resources/js/most_used.js',
-            'resources/js/client.js',
-            'resources/js/content_maker.js',
-            'resources/js/specified.js',
-            'resources/js/lmv.js',
         ]),
     ],
     optimizeDeps: {

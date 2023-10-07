@@ -11,7 +11,7 @@
 @section('content')	
 
     <header class="">
-        <h2>Форма {{ $blog ? 'редагування' : 'додавання' }} блогу</h2>
+        <h2>Форма {{ $post ? 'редагування' : 'додавання' }} посту</h2>
     </header>
 
     {{-- Повідомлення --}}
@@ -27,38 +27,39 @@
     @endif
 
 
-    <form action="/profile/blog/{{ $blog ? $blog->id.'/edit' : 'add' }}" method="POST" id="blog-form"
+    <form action="/profile/post/{{ $post ? $post->id.'/edit' : 'add' }}" method="POST" id="post-form"
         class="validate-form">
         @csrf
 
         <div class="mb-3">
             <label for="" class="form-label">Назва</label>
             <div class="error-text hide" id="error_name">Заповніть поле</div>
-            <input type="text" name="title" value="{{ $blog ? $blog->title : '' }}" class="required">
+            <input type="text" name="name" value="{{ $post ? $post->name : '' }}" class="required">
         </div>
 
         <div class="mb-3">
-            <label for="" class="form-label">Категорія</label>
-            <div class="base-select">
-                <div class="select-box">
-                    <span class="selected-option d-flex align-items-center">
-                    {{ $blog && $blog->category ? $blog->category->name : 'Інше' }}
-                    <i class="fa-solid fa-angle-down ml-auto"></i></span>
-                    <ul class="options hide">
-                    <li data-value="">Інше</li>
-                    @foreach ($categories as $category)
-                        <li data-value="{{ $category->id }}">{{ $category->name }}</li>
-                    @endforeach
-                    </ul>
+            <label for="" class="form-label">Опис</label>
+            <textarea name="about" rows="2">{{ $post ? $post->about : '' }}</textarea>
+        </div>  
+
+        {{-- Картинка --}}
+        <div class="mb-3">
+            <label for="" class="form-label">Додайте зображення</label>
+            <div class="mb-3">
+                <input type="file" id="file_img" accept="image/*">
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="input-with-btt enter_btn" id="url_img" placeholder="URL зображення">
+                <button class="btn btn-outline-secondary btt-with-input" type="button" id="btn_url_img">Додати</button>
+            </div>
+
+            <div class="container mb-3">
+                <input type="hidden" name="img_pass" value="" id="img_pass">
+                <div class="img_preview" id="container_img">                                   
+                    <img src="{{ $post && $img_edit? asset($img_edit):'' }}" alt="картинка" id='post_img'>
                 </div>
-                <input type="hidden" name="category_id" value="{{ $blog ? $blog->category_id : '' }}">
-            </div>     
-        </div>
-
-        <div class="mb-3">
-            <label for="" class="form-label">Текст</label>
-            <textarea name="content" rows="15" id="blog_content">{{ $blog ? $blog->content : '' }}</textarea>
-        </div>                             
+            </div>
+        </div>                        
 
         <div class='text-end'>
             <input type="submit" name="submit" class="base-btn" value="Опублікувати">
@@ -66,7 +67,7 @@
     </form>    
 
 <script src="https://cdn.tiny.cloud/1/tatyegaul1dl88btgari4jz7c7st2hz44mxb4kck1c4rvzip/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> 
-@vite('resources/js/specified.js')  
+
 
 @endsection
 	

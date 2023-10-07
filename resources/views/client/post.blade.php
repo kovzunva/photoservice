@@ -16,31 +16,33 @@
 	<section>					
 		<header class="rel">	
 
-			<h2 class="me-5">{{$blog->title}}</h2>	
+			<h2 class="me-5">{{$post->name}}</h2>	
+			<div class="img_preview">
+				<img src="{{asset($img)}}" alt="">
+			</div>
 			<div class="mb-2">
 				<span>
-					<span class="ava">{{ $blog->user->name[0] }}</span>
-					{{ $blog->user->name }},
+					<span class="ava">{{ $post->user->name[0] }}</span>
+					{{ $post->user->name }},
 				</span>
-				<span>{{ $blog->created_at->format('d.m.Y H:i:s') }}</span>
-				<span class="ms-1">{{ $blog->category? '#'.$blog->category->name:'' }}</span>
+				<span>{{ $post->created_at->format('d.m.Y H:i:s') }}</span>
 			</div>
 
-			@if ($blog->user_id === auth()->id())
+			@if ($post->user_id === auth()->id())
 				<div class="options-btn">
 					<div class="custom-dropdown-btn">
 						<i class="fa-solid fa-ellipsis"></i>
 					</div>
 					<div class="custom-dropdown-menu">
-						<a class="dropdown-item" href="/profile/blog/{{$blog->id}}">Редагувати</a>
-						<a class="dropdown-item" href="/profile/blog/{{$blog->id}}/del">Видалити</a>
+						<a class="dropdown-item" href="/profile/post/{{$post->id}}">Редагувати</a>
+						<a class="dropdown-item" href="/profile/post/{{$post->id}}/del">Видалити</a>
 					</div>
 				</div>
 			@endif	
 
 		</header>	 
 		<div class="text-from-editor">
-			{!! $blog->content !!}
+			{{ $post->about }}
 		</div>
 	</section>
 
@@ -49,27 +51,27 @@
 		<div class="text-end">		
 			<div class="like-group">
 				
-				<span class="count-span">{{$blog->comments->count()}}</span>
+				<span class="count-span">{{$post->comments->count()}}</span>
 				<i class="
-				@if (Auth::check() && $blog->comments->where('user_id', Auth::user()->id)->count() > 0)
+				@if (Auth::check() && $post->comments->where('user_id', Auth::user()->id)->count() > 0)
 					fa-solid @else fa-regular
 				@endif	
 				fa-comment me-2"></i>
 
-				<input type="hidden" name="item_id" value="{{$blog->id}}">
-				<input type="hidden" name="item_type" value="blog">
-				<span class="count-span likes-count">{{$blog->likes->count()}}</span>
+				{{-- <input type="hidden" name="item_id" value="{{$post->id}}">
+				<input type="hidden" name="item_type" value="post">
+				<span class="count-span likes-count">{{$post->likes->count()}}</span>
 				<i class="
-				@if (Auth::check() && $blog->likes->where('user_id', Auth::user()->id)->where('item_type', 'blog')->count() > 0)
+				@if (Auth::check() && $post->likes->where('user_id', Auth::user()->id)->where('item_type', 'post')->count() > 0)
 					fa-solid @else fa-regular
 				@endif						
-					fa-heart like-btn"></i>
+					fa-heart like-btn"></i> --}}
 			</div>
 		</div>
 
 		<form method="POST" action="/comment/add" class="validate-form">
 			@csrf
-			<input type="hidden" name="blog_id" value="{{ $blog->id }}">
+			<input type="hidden" name="post_id" value="{{ $post->id }}">
 
 			<div class="form-group">
 				<label for="comment"><h4>Ваш коментар:</h4></label>
@@ -85,8 +87,8 @@
 		<h4>Коментарі:</h4>
 
 		<!-- Виведення коментарів -->
-		{{ count($blog->comments) > 0 ? '' : 'Ще нема коментарів' }}
-		@foreach ($blog->comments as $comment)
+		{{ count($post->comments) > 0 ? '' : 'Ще нема коментарів' }}
+		@foreach ($post->comments as $comment)
 			<hr>
 			<div class="comment-item mb-3" data-comment-id="{{ $comment->id }}">
 				<header class="rel">
@@ -107,7 +109,7 @@
 				<div class="comment-text">
 					<p>{{ $comment->content }}</p>
 					<p class="m-none">
-						{{ $blog->created_at->format('d.m.Y H:i:s') 
+						{{ $post->created_at->format('d.m.Y H:i:s') 
 					}}@if ($comment->updated_at != $comment->created_at), змінено
 						@endif
 					</p>

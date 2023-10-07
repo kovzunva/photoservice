@@ -3,6 +3,66 @@ import $ from 'jquery';
 window.jQuery = $;
 window.$ = $;
 
+// Перевірки при надсиланні форми
+document.addEventListener("DOMContentLoaded", function() {
+  const validateForms = document.querySelectorAll(".validate-form");
+
+  validateForms.forEach(form => {
+      form.addEventListener("submit", function(event) {
+          let hasError = false;
+
+          // Обов'язкові поля
+          const requiredInputs = form.querySelectorAll(".required");
+          requiredInputs.forEach(input => {
+              const errorMessage = form.querySelector("#error_" + input.name);
+              if (input.value.trim() === "") {
+                  errorMessage.classList.remove('hide');
+                  hasError = true;
+                  input.focus();
+                  errorMessage.scrollIntoView();
+              }
+              else {
+                  errorMessage.classList.add('hide');
+              }
+          });
+
+          // Блоки, які не можуть бути пусті
+          const noEmptyBlocks = document.querySelectorAll('.no-empty');
+          noEmptyBlocks.forEach(block => {
+              const childElements = Array.from(block.children);
+      
+              const hasVisibleChild = childElements.some(element => {
+                  const computedStyle = getComputedStyle(element);
+                  const hasHiddenClass = element.classList.contains('hide') || element.classList.contains('hide-post');
+                  const isHiddenAttributeSet = element.hasAttribute('hidden');
+      
+                  return (
+                      !hasHiddenClass &&
+                      !isHiddenAttributeSet
+                  );
+              });
+      
+              const errorBlock = document.getElementById('error_' + block.id);
+      
+              if (!hasVisibleChild) {
+                  errorBlock.classList.remove('hide');
+                  hasError = true;
+              }
+              else {
+                  errorBlock.classList.add('hide');
+              }
+          });
+
+          // сюди інші перевірки 
+
+          if (hasError) {
+              event.preventDefault();
+          }
+      });
+  });
+});
+
+
 // Селект
 $(document).ready(function() {
     $(".base-select").on("click", ".selected-option", function() {
@@ -104,3 +164,37 @@ numberInputsDot.forEach(input => {
         input.value = value;
     });
 });
+
+function PrintNewImgEdit(imageURL){
+  post_img.src = imageURL;
+  img_pass.value = imageURL;
+}
+
+const fileInput = document.getElementById('file_img');
+if (fileInput) {
+fileInput.addEventListener('change', function() {
+
+  const imageFile = this.files[0];
+  if (imageFile) {
+    const fileReader = new FileReader();
+    fileReader.onload = function(event) {
+      const imageURL = event.target.result;
+      PrintNewImgEdit(imageURL);
+    }
+    fileReader.readAsDataURL(imageFile);
+  }
+});
+}
+
+const urlInput = document.getElementById('url_img');
+if (urlInput) {
+document.getElementById('btn_url_img').addEventListener('click', function() {
+
+  const imageURL = urlInput.value.trim();
+
+  if (imageURL !== '') {        
+    PrintNewImgEdit(imageURL);
+    urlInput.value = '';
+  }
+});
+}

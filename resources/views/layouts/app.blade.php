@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ isset($title)? $title:'' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
-    @vite(['resources/css/my_style.css', 'resources/js/most_used.js', 'resources/js/client.js'])   
+    @vite(['resources/css/my_style.css', 'resources/js/most_used.js'])   
 </head>
 <body>
 
@@ -23,7 +23,7 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                         
-                            <a class="navbar-brand" href="/"><h1>Щопочитайка</h1></a>
+                            <a class="navbar-brand" href="/"><h1>Фотосервіс</h1></a>
     
                             <form action="" class="d-flex me-2" role="search" method="GET">
                                 <input class="base-input me-2" type="search" name="name" placeholder="Пошук" aria-label="Search">
@@ -64,7 +64,6 @@
                 <div  class="side-navbar-container">
                     <nav  class="side-navbar">
                         <a href="/"><i class="fa-solid fa-house"></i></a> {{-- Головна --}}
-                        <a href="/items"><i class="fa-solid fa-scroll"></i></a> {{-- Товари --}}
                         <a href="/profile"><i class="fa-solid fa-user"></i></a> {{-- Профіль --}}
                     </nav>
                 </div>
@@ -73,12 +72,8 @@
         </div>
     </header>    
 
-    <div id="app" class="container py-4">
-        <div class="row">
-            <aside class="col-lg-3 col-md-6 col-sm-12 pe-5">
-                @yield('aside')
-            </aside>
-            <main class="col-lg-9 col-md-6 col-sm-12">
+    <div id="app" class="container px-4">
+            <main class="">
                 @yield('content')
             </main>
         </div>
