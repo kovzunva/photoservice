@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ isset($title)? $title:'' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
-    @vite(['resources/css/my_style.css', 'resources/js/most_used.js'])   
+    <link rel="stylesheet" href="/css/my_style.css">
 </head>
 <body>
 
@@ -87,7 +87,8 @@
         </address>
     </footer>  --}}
 
-    <script src="https://kit.fontawesome.com/c04e65d013.js" crossorigin="anonymous"></script>
-    
+    <script src="https://kit.fontawesome.com/c04e65d013.js" crossorigin="anonymous"></script>    
+    <script src="/jquery.js"></script>
+    <script src="/js/most_used.js"></script>
 </body>
 </html>
