@@ -62,7 +62,7 @@
 				<input type="hidden" name="item_type" value="post">
 				<span class="count-span likes-count">{{$post->likes->count()}}</span>
 				<i class="
-				@if (Auth::check() && $post->likes->where('user_id', Auth::user()->id)->where('item_type', 'post')->count() > 0)
+				@if (Auth::check() && $post->likes->where('user_id', Auth::user()->id)->count() > 0)
 					fa-solid @else fa-regular
 				@endif
 					fa-heart like-btn"></i>

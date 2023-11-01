@@ -224,7 +224,6 @@ likeButtons.forEach(likeButton => {
         let likesCountSpan = likeGroup.querySelector('.likes-count');
 
         // Отримуємо значення з цих інпутів
-        let item_type = item_typeInput.value;
         let item_id = itemIdInput.value;
 
         // Створюємо об'єкт з параметрами
