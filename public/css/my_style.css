@@ -14,12 +14,41 @@
     --form-elements-color: transparent;
 }
 
+header {
+    background-color: #333; /* Змініть колір фону на потрібний вам */
+    color: #fff; /* Змініть колір тексту на потрібний вам */
+    padding: 10px 0; /* Задайте бажані відступи */
+  }
+  
+  /* Стилі для лівої частини (name) */
+  .navbar-brand {
+    text-align: left;
+  }
+  
+  /* Стилі для середньої частини (search) */
+  .d-flex {
+    flex: 1; /* Ростягнути "search" на всю доступну ширину */
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Стилі для правої частини (login) */
+  .nav-link {
+    text-align: right;
+  }
+
 /* базова стилізація */
 body{
-    /* background-image: url('../images/BG.jpg'); */
+     background:rgb(109, 108, 108);
     background-size: cover;
     color: var(--base-elements-color);
     font-family: 'Montserrat Alternates';
+}
+
+header{
+    background:rgb(53, 53, 53);
+    height: fit-content;
+    padding: 10px;
 }
 
 footer{
@@ -33,7 +62,6 @@ footer{
     bottom: 0;
     left: 0;
     right: 0;
-    background-image: url('../images/BG.jpg');
     z-index: -1;
     width: 100%;
     height: 100%;
@@ -163,8 +191,6 @@ i{
 
 .base-btn{
     background-color: var(--form-elements-color);
-    background-image: url('../images/btt.png');
-    background-repeat: no-repeat;
     background-size: 100% 100%;
     border: none;
     outline: none;

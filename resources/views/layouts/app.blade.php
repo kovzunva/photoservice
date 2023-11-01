@@ -5,28 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ isset($title)? $title:'' }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
-    <link rel="stylesheet" href="/css/my_style.css">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}"> 
+
+    <link href="/css/my_style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-    <img src="{{ asset('images/BG.jpg') }}" alt="" id="bg">
+   <!--- <img src="{{ asset('images/BG.jpg') }}" alt="" id="bg">-->
 
     <header id="header">
-        <div class="container">
             <div class="row">
     
                 <nav class="navbar navbar-expand-lg bg-transparent m-none">
                     <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                     
+                        <div class="collapse navbar-collapse justify-content" id="navbarNav">
                         
-                            <a class="navbar-brand" href="/"><h1>Фотосервіс</h1></a>
+                            <a class="navbar-brand" href="/"><h1>PhotoPinHub</h1></a>
     
-                            <form action="" class="d-flex me-2" role="search" method="GET">
-                                <input class="base-input me-2" type="search" name="name" placeholder="Пошук" aria-label="Search">
+                            <form action="" class="d-flex " role="search" method="GET">
+                                <input class="base-input " type="search" name="name" placeholder="Пошук" aria-label="Search">
                                 <button class="base-btn" type="submit">Пошук</button>
                             </form>
     
@@ -61,34 +59,31 @@
                     </div>
                 </nav>
 
-                <div  class="side-navbar-container">
-                    <nav  class="side-navbar">
-                        <a href="/"><i class="fa-solid fa-house"></i></a> {{-- Головна --}}
-                        <a href="/profile"><i class="fa-solid fa-user"></i></a> {{-- Профіль --}}
-                    </nav>
-                </div>
-                          
-            </div>
+            
         </div>
     </header>    
 
-    <div id="app" class="container px-4">
-            <main class="">
+    <div id="app" class="container py-4">
+        <div class="row">
+            <main class="col-lg-9 col-md-6 col-sm-12">
                 @yield('content')
             </main>
         </div>
 
     </div>
 
-    {{-- <footer class="text-center" id="footer">
+   <footer class="text-center" id="footer">
         <address class="col">
-            <div>© whattoread.com, 2023</div>
-            <div>Авторські права збережено</div>
+            <div>PhotoPinHub, 2023</div>
+            <div>© Кішечки.</div>
         </address>
-    </footer>  --}}
+    </footer>  
 
-    <script src="https://kit.fontawesome.com/c04e65d013.js" crossorigin="anonymous"></script>    
-    <script src="/jquery.js"></script>
+    <script src="https://kit.fontawesome.com/c04e65d013.js" crossorigin="anonymous"></script>
+    
+    <script src="/js/jquery.js"></script>
+    <!----<script src="/js/bootstrap.js"></script>-->
     <script src="/js/most_used.js"></script>
+    
 </body>
 </html>
