@@ -33,7 +33,7 @@
 		</a>
         <div>
             @foreach ($posts as $post)
-                <a href="profile/post/{{$post->id}}">                    
+                <a href="/post/{{$post->id}}">                    
                     <div class="mb-3">
                         <h5>{{$post->name}}</h5>
                         <div class="img_preview">
