@@ -1,0 +1,22 @@
+cd c:\OSPanel\domains\localhost\shop
+
+php artisan make:controller НазваКонтролера
+php artisan make:model НазваМоделі
+php artisan backup:run
+
+cd c:\OSPanel\domains\localhost\shop
+npm run dev (автоматична компіляція файлів з ресурсів в паблік)
+npm run build (кінцева компіляція файлів з ресурсів в паблік)
+
+
+cd c:\OSPanel
+cd domains
+cd localhost
+cd photoservice2.0
+
+git add .
+cd photoservice
+git add .
+git status
+
+git push origin main
