@@ -18,3 +18,5 @@ yarn-error.log
 /.idea
 /.vscode
 /config/database.php
+/public/images
+/resources/images
