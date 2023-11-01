@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class PostController extends Controller
 {
-    
+
     public function showAll(Request $request, $page=1){
         $posts = Post::orderBy('created_at', 'desc')->get();
         foreach ($posts as $post) {
@@ -20,7 +20,7 @@ class PostController extends Controller
         }
         $paginator = HelperController::paginator($posts,'postPage',$page,3);
 
-        return view('client.main-page', 
+        return view('client.main-page',
         [
             'posts' => $paginator['data'],
             'paginator' => $paginator['paginator'],
@@ -29,7 +29,7 @@ class PostController extends Controller
     }
 
     public function emptyForm(){
-        return view('client.post-form', 
+        return view('client.post-form',
         [
             'post' => null,
             'title' => "Додавання Посту",
@@ -125,6 +125,5 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('my-posts')->with('success', 'Пост успішно видалено!');
-    }   
+    }
 }
-
