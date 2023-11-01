@@ -25,8 +25,8 @@
 
                             <a class="navbar-brand" href="/"><h1>Фотосервіс</h1></a>
 
-                            <form action="" class="d-flex me-2" role="search" method="GET">
-                                <input class="base-input me-2" type="search" name="name" placeholder="Пошук" aria-label="Search">
+                            <form action="/search" class="d-flex me-2" role="search" method="GET" >
+                                <input class="base-input me-2" type="search" name="search" placeholder="Пошук" aria-label="Search">
                                 <button class="base-btn" type="submit">Пошук</button>
                             </form>
 
