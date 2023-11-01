@@ -10,7 +10,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 
-// 
+//
 // Клієнтська частина
 Route::get('/', [PostController::class, 'showAll']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -42,3 +42,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/comment/{id}/edit', [CommentController::class, 'edit']);
     Route::get('/comment/{id}/del', [CommentController::class, 'del']);
 });
+Route::get('/search', [PostController::class, 'search']);
