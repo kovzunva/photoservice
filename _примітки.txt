@@ -13,3 +13,10 @@ cd c:\OSPanel
 cd domains
 cd localhost
 cd photoservice2.0
+
+git add .
+cd photoservice
+git add .
+git status
+
+git push origin main

@@ -124,7 +124,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
 
-        return redirect()->route('my-posts')->with('success', 'Пост успішно видалено!');
+        return redirect()->route('/')->with('success', 'Пост успішно видалено!');
     }   
 }
 

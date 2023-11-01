@@ -1,7 +1,7 @@
-import 'bootstrap/dist/js/bootstrap.min.js';
-import $ from 'jquery';
-window.jQuery = $;
-window.$ = $;
+// import 'bootstrap/dist/js/bootstrap.min.js';
+// import $ from 'jquery';
+// window.jQuery = $;
+// window.$ = $;
 
 // Перевірки при надсиланні форми
 document.addEventListener("DOMContentLoaded", function() {

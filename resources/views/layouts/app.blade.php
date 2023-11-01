@@ -88,7 +88,7 @@
     </footer>  --}}
 
     <script src="https://kit.fontawesome.com/c04e65d013.js" crossorigin="anonymous"></script>    
-    <script src="/jquery.js"></script>
+    <script src="/js/jquery.js"></script>
     <script src="/js/most_used.js"></script>
 </body>
 </html>
