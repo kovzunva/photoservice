@@ -61,7 +61,12 @@
 
             
         </div>
-    </header>    
+    </header>    <div  class="side-navbar-container">
+                    <nav  class="side-navbar">
+                        <a href="/"><i class="fa-solid fa-house"></i></a> {{-- Головна --}}
+                        <a href="/profile"><i class="fa-solid fa-user"></i></a> {{-- Профіль --}}
+                    </nav>
+                </div>
 
     <div id="app" class="container py-4">
         <div class="row">
