@@ -80,20 +80,8 @@
 
     </div>
 
-    {{-- <footer class="text-center" id="footer">
-        <address class="col">
-            <div>© whattoread.com, 2023</div>
-            <div>Авторські права збережено</div>
-        </address>
-    </footer>  --}}
-
-<<<<<<< HEAD
-    <script src="https://kit.fontawesome.com/c04e65d013.js" crossorigin="anonymous"></script>    
-    <script src="/js/jquery.js"></script>
-=======
     <script src="https://kit.fontawesome.com/c04e65d013.js" crossorigin="anonymous"></script>
-    <script src="/JS/jquery.js"></script>
->>>>>>> origin/backend
+    <script src="/js/jquery.js"></script>
     <script src="/js/most_used.js"></script>
 </body>
 </html>
