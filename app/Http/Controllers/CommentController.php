@@ -14,7 +14,7 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->content = $request->input('content');
         $comment->user_id = auth()->user()->id;
-        $comment->blog_id = $request->input('blog_id');
+        $comment->post_id = $request->input('post_id');
         $comment->save();
 
         return redirect()->back()->with('success', 'Коментар додано успішно.');
@@ -27,7 +27,7 @@ class CommentController extends Controller
         if ($comment->user_id !== auth()->user()->id) {
             return redirect()->back()->with('error', 'Ви не можете редагувати цей коментар.');
         }
-        
+
         $comment->content = $request->input('edit_content');
         $comment->save();
 

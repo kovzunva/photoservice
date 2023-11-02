@@ -49,9 +49,16 @@ return [
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'laravel'),
+<<<<<<< HEAD
             'username' => 'root', //поміняти user
             'password' => 'password',
             'unix_socket' => env('DB_SOCKET', ''),
+=======
+            'username' => 'root',
+            'password' => 'VfheczOfckbdf%0',
+            // 'unix_socket' => env('DB_SOCKET', ''),
+            'unix_socket' => '/photoservice/mysql.sock',
+>>>>>>> 018a9cc4c4b4357ed901b5c43976098d7276b023
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -125,7 +132,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [

@@ -1,4 +1,6 @@
 
+window.jQuery = $;
+window.$ = $;
 
 // Перевірки при надсиланні форми
 document.addEventListener("DOMContentLoaded", function() {
@@ -27,20 +29,20 @@ document.addEventListener("DOMContentLoaded", function() {
           const noEmptyBlocks = document.querySelectorAll('.no-empty');
           noEmptyBlocks.forEach(block => {
               const childElements = Array.from(block.children);
-      
+
               const hasVisibleChild = childElements.some(element => {
                   const computedStyle = getComputedStyle(element);
                   const hasHiddenClass = element.classList.contains('hide') || element.classList.contains('hide-post');
                   const isHiddenAttributeSet = element.hasAttribute('hidden');
-      
+
                   return (
                       !hasHiddenClass &&
                       !isHiddenAttributeSet
                   );
               });
-      
+
               const errorBlock = document.getElementById('error_' + block.id);
-      
+
               if (!hasVisibleChild) {
                   errorBlock.classList.remove('hide');
                   hasError = true;
@@ -50,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
               }
           });
 
-          // сюди інші перевірки 
+          // сюди інші перевірки
 
           if (hasError) {
               event.preventDefault();
@@ -66,14 +68,14 @@ $(document).ready(function() {
       var $baseSelect = $(this).closest(".base-select");
       $baseSelect.find(".options").toggleClass("hide");
     });
-  
+
     $(".base-select").on("click", ".options li", function() {
         var $baseSelect = $(this).closest(".base-select");
         var selectedValue = $(this).data("value");
         $baseSelect.find("input[type='hidden']").val(selectedValue);
         $baseSelect.find(".selected-option").text($(this).text());
         $baseSelect.find(".options").addClass("hide");
-            
+
         // фільтрування при зміні опції
         if ($(this).hasClass("filter-option")) {
             var $parentForm = $baseSelect.closest("form");
@@ -109,7 +111,7 @@ document.addEventListener('input', function(event) {
     if (event.target.classList.contains('input-date')) {
       const input = event.target;
       const value = input.value.replace(/\D/g, '');
-      
+
       if (value.length >= 2 && value.length < 4) {
         input.value = value.slice(0, 2) + '.' + value.slice(2);
       }
@@ -119,7 +121,7 @@ document.addEventListener('input', function(event) {
       else {
         input.value = value;
       }
-      
+
     }
   });
 document.addEventListener('keydown', function(event) {
@@ -143,7 +145,7 @@ const numberInputsDot = document.querySelectorAll('.number-dot');
 numberInputsDot.forEach(input => {
     input.addEventListener('input', function() {
         let value = input.value;
-        
+
         // Замінюємо всі символи, крім цифр і крапки, на порожній рядок
         value = value.replace(/[^0-9.]/g, '');
 
@@ -190,7 +192,7 @@ document.getElementById('btn_url_img').addEventListener('click', function() {
 
   const imageURL = urlInput.value.trim();
 
-  if (imageURL !== '') {        
+  if (imageURL !== '') {
     PrintNewImgEdit(imageURL);
     urlInput.value = '';
   }
@@ -213,4 +215,56 @@ document.addEventListener('DOMContentLoaded', function() {
           }
       });
   });
+});
+
+let likeButtons = document.querySelectorAll('.like-btn');
+likeButtons.forEach(likeButton => {
+    likeButton.addEventListener('click', () => {
+        let likeGroup = likeButton.closest('.like-group');
+
+        let itemIdInput = likeGroup.querySelector('input[name="item_id"]');
+        let likesCountSpan = likeGroup.querySelector('.likes-count');
+
+        // Отримуємо значення з цих інпутів
+        let item_id = itemIdInput.value;
+
+        // Створюємо об'єкт з параметрами
+        let requestData = {
+            item_id: item_id,
+        };
+        // Відправка AJAX-запиту на сервер для додавання лайку
+        fetch('/like', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Вподобайку успішно додано
+                let likesCountValue = Number(likesCountSpan.innerHTML);
+
+                if (data.liked) {
+                    likeButton.classList.remove('fa-regular');
+                    likeButton.classList.add('fa-solid');
+                    likesCountSpan.innerHTML = likesCountValue + 1;
+                }
+                else {
+                    likeButton.classList.remove('fa-solid');
+                    likeButton.classList.add('fa-regular');
+                    likesCountSpan.innerHTML = likesCountValue - 1;
+                }
+            }
+            else {
+                // Виникла помилка при додаванні вподобайки
+                alert('Помилка: '+data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Помилка при виконанні AJAX-запиту:', error);
+        });
+    })
 });
