@@ -103,6 +103,7 @@ document.addEventListener('click', function(event) {
 });
 
 
+
 // Введення дати
 document.addEventListener('input', function(event) {
     if (event.target.classList.contains('input-date')) {

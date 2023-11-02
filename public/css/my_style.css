@@ -5,55 +5,47 @@
 /* змінні */
 :root{
     --base-elements-color: black;
-    --base-color-smaller: #1f1f1f;
+    --base-color-smaller: #1a1a1f;
     --base-color-transparent: #0000006b;
-    --anti-base-elements-color: white;
+    --anti-base-elements-color: #dadcdb;
     --anti-base-elements-color-transparent: rgba(255, 255, 255, 0.150);
     --error: orangered;
     --success: green;
     --form-elements-color: transparent;
+    --desired-text-color: #d9dadf;
 }
 
-header {
-    background-color: #333; /* Змініть колір фону на потрібний вам */
-    color: #fff; /* Змініть колір тексту на потрібний вам */
-    padding: 10px 0; /* Задайте бажані відступи */
-  }
-  
-  /* Стилі для лівої частини (name) */
-  .navbar-brand {
-    text-align: left;
-  }
-  
-  /* Стилі для середньої частини (search) */
-  .d-flex {
-    flex: 1; /* Ростягнути "search" на всю доступну ширину */
-    display: flex;
-    justify-content: center;
-  }
-  
-  /* Стилі для правої частини (login) */
-  .nav-link {
-    text-align: right;
-  }
-
-/* базова стилізація */
 body{
-     background:rgb(109, 108, 108);
-    background-size: cover;
-    color: var(--base-elements-color);
+    background: radial-gradient(circle at 450px 0,#4b4c52,  #26272c, #1d1e23,#1a1a1f);
+
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
     font-family: 'Montserrat Alternates';
 }
 
-header{
-    background:rgb(53, 53, 53);
-    height: fit-content;
-    padding: 10px;
-}
 
+
+
+
+/* базова стилізація */
+
+  
+header{    
+    background-color: transparent; /* Змініть колір фону на потрібний вам */
+    color: var(--desired-text-color); /* Змініть колір тексту на потрібний вам */
+
+    height: fit-content;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-bottom: black;
+}
+  
 footer{
-    padding: 30px;
+    padding-top: 30px;
     opacity: 0.3;
+    color: var(--desired-text-color);
 }
 
 #bg{
@@ -154,24 +146,7 @@ i{
 .options-btn:hover{
     cursor: pointer;
 }
-.custom-dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: var(--base-color-smaller);
-    color: var(--anti-base-elements-color);
-    z-index: 1;
-    border-radius: 5px;
-}
-.dropdown-item{
-    background-color: var(--base-color-smaller);
-    color: var(--anti-base-elements-color);
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-.dropdown-item:hover{
-    background-color: var(--anti-base-elements-color-transparent);
-    color: var(--anti-base-elements-color);
-}
+
 
 .content-maker-menu-btt{
     color: var(--base-elements-color);
@@ -554,16 +529,7 @@ input.select2-search__field {
     border-radius: 5px;
 }
 
-.ava{
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 2px solid var(--base-elements-color);
-    display: inline-block;
-    text-align: center;
-    line-height: 36px;
-    font-weight: bold;
-}
+
 
 .card{
     background-color: var(--form-elements-color);
@@ -800,4 +766,83 @@ img{
 
 .show {
     display: block;
+}
+
+
+/*мої*/
+
+/* Стилі для лівої частини (name) */
+.navbar-brand {
+    text-align: left;
+    color: var(--desired-text-color);
+}
+
+.navbar-brand:hover {
+    color: var(--desired-text-color);
+   
+}
+
+/* Стилі для середньої частини (search) */
+.d-flex {
+    flex: 1; /* Ростягнути "search" на всю доступну ширину */
+    display: flex;
+    justify-content: center;
+}
+  
+/* Стилі для правої частини (login) */
+.nav-link {
+    text-align: right;
+    margin-left: 10px;
+    color: var(--desired-text-color);
+
+}
+
+input[type='search'].my-base-input {
+    border: none; /* Видаляємо рамку */
+    width: 100%; /* Займає всю доступну ширину */
+    box-shadow: -5px 5px 5px -5px black; /* Злитна тінь зліва і внизу (чорна тінь) */
+    outline: none; /* Забираємо виділення при фокусі */
+    border-radius: 0;
+}
+
+input[type='search'].my-base-input::selection,
+input[type='search'].my-base-input::-moz-selection {
+    background-color: transparent; /* Ваш бажаний колір фону */
+    color: var(--desired-text-color); /* Ваш бажаний колір тексту */
+}
+
+.custom-dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: var(--base-color-smaller);
+    color: var(--anti-base-elements-color);
+    z-index: 1;
+    border-radius: 0;
+}
+
+.custom-dropdown-menu.dropdown-menu {
+    right: 0;
+}
+
+.custom-dropdown-btn .dropdown-toggle::after {
+    display: none;
+  }
+
+.ava{
+    width: 36px;
+    height:max-content;
+    display: inline-block;
+    text-align: center;
+    line-height: max-content;
+    font-weight: bold;
+}
+
+.dropdown-item{
+    background-color: var(--base-color-smaller);
+    color: var(--anti-base-elements-color);
+    padding: 5px 10px;
+}
+.dropdown-item:hover{
+    background-color: var(--anti-base-elements-color-transparent);
+    color: var(--anti-base-elements-color);
 }

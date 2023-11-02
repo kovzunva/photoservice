@@ -33,7 +33,7 @@
 					<div class="custom-dropdown-btn">
 						<i class="fa-solid fa-ellipsis"></i>
 					</div>
-					<div class="custom-dropdown-menu">
+					<div class="custom-dropdown-menu dropdown-menu">
 						<a class="dropdown-item" href="/profile/post/{{$post->id}}">Редагувати</a>
 						<a class="dropdown-item" href="/profile/post/{{$post->id}}/del">Видалити</a>
 					</div>

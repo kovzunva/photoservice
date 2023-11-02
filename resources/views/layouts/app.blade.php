@@ -13,7 +13,7 @@
 
    <!--- <img src="{{ asset('images/BG.jpg') }}" alt="" id="bg">-->
 
-    <header id="header">
+  <header id="header">
             <div class="row">
     
                 <nav class="navbar navbar-expand-lg bg-transparent m-none">
@@ -23,9 +23,8 @@
                         
                             <a class="navbar-brand" href="/"><h1>PhotoPinHub</h1></a>
     
-                            <form action="" class="d-flex " role="search" method="GET">
-                                <input class="base-input " type="search" name="name" placeholder="Пошук" aria-label="Search">
-                                <button class="base-btn" type="submit">Пошук</button>
+                            <form action="" class="d-flex" role="search" method="GET">
+                                <input class="my-base-input" type="search" name="name" placeholder="Пошук" aria-label="Search">
                             </form>
     
                             @guest
@@ -36,24 +35,27 @@
                                 @if (Route::has('register'))
                                     <a class="nav-link" href="{{ route('register') }}">Рестрація</a>
                                 @endif
-                            @else
-                                <li class="nav-item dropdown">
+                            @else 
+                            <div>
+                                <div class="custom-dropdown-btn">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <span class="ava">{{ Auth::user()->name[0] }}</span>
+                                        <span class="ava">{{ Auth::user()->name}}</span>
                                     </a>
-                                        <div class="custom-dropdown-menu dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                </div>
+
+                                <div class="custom-dropdown-menu dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">      
                                             <a class="dropdown-item" href="/profile">Профіль</a>                                            </a>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
+                                                {{ __('Вийти') }}
                                             </a>
         
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                 @csrf
                                             </form>
-                                        </div>
-                                </li>
+                                </div> 
+                            </div> 
                             @endguest
                         </div>
                     </div>
@@ -61,12 +63,8 @@
 
             
         </div>
-    </header>    <div  class="side-navbar-container">
-                    <nav  class="side-navbar">
-                        <a href="/"><i class="fa-solid fa-house"></i></a> {{-- Головна --}}
-                        <a href="/profile"><i class="fa-solid fa-user"></i></a> {{-- Профіль --}}
-                    </nav>
-                </div>
+    </header>      
+
 
     <div id="app" class="container py-4">
         <div class="row">
@@ -87,7 +85,6 @@
     <script src="https://kit.fontawesome.com/c04e65d013.js" crossorigin="anonymous"></script>
     
     <script src="/js/jquery.js"></script>
-    <!----<script src="/js/bootstrap.js"></script>-->
     <script src="/js/most_used.js"></script>
     
 </body>
