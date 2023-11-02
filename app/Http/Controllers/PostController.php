@@ -19,13 +19,11 @@ class PostController extends Controller
         foreach ($posts as $post) {
             $post->img = HelperController::getImg('post', $post->id);
         }
-        $paginator = HelperController::paginator($posts, 'postPage', $page, 3);
 
         return view(
             'client.main-page',
             [
-                'posts' => $paginator['data'],
-                'paginator' => $paginator['paginator'],
+                'posts' => $posts,
                 'title' => "Пости",
             ]
         );
@@ -147,13 +145,11 @@ class PostController extends Controller
         foreach ($posts as $post) {
             $post->img = HelperController::getImg('post', $post->id);
         }
-        $paginator = HelperController::paginator($posts, 'postPage', $page, 3);
 
         // Передайте результат пошуку в представлення
         return view('client.main-page', [
             'search' => $search,
-            'posts' => $paginator['data'],
-            'paginator' => $paginator['paginator'],
+            'posts' => $posts,
         ]);
     }
 }
