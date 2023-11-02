@@ -13,6 +13,7 @@ cd c:\OSPanel
 cd domains
 cd localhost
 cd photoservice2.0
+cd photoservice
 
 git add .
 cd photoservice

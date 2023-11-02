@@ -17,5 +17,4 @@
             </a>
         @endforeach
     </div>
-    {!!$paginator!!}
 @endsection	
