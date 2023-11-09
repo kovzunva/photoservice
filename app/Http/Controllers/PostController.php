@@ -99,11 +99,12 @@ class PostController extends Controller
                     'about' => $request['about'],
                 ]);
 
+                $img = $request->input('img_pass');
                 // Картинка
                 try {
-                    $img = $request->input('img_pass');
                     if ($img) {
-                        HelperController::delImg(HelperController::getImg('post', $post->id));
+                        $last_img = HelperController::getImg('post', $post->id);
+                        if ($last_img) HelperController::delImg($last_img);
                         $mes = HelperController::saveImg($img, 'post', $post->id);
                         if ($mes != '')
                             $error .= $mes . ' ';
