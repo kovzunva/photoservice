@@ -95,16 +95,17 @@ p{
 }
 
 h2{
-    color: var(--highlight-color);
+    color: var(--desired-text-color);
     font-family: 'Montserrat Alternates';
 }
 
 a{
-    color: var(--base-elements-color);
+    color: var(--desired-text-color);
     text-decoration: none;
 }
 a:hover{
     cursor: pointer;
+    
 }
 
 .error-text{
@@ -235,8 +236,8 @@ input[type='email'],input[type='password'],textarea{
     padding: .375rem .75rem;;
     background-color: var(--form-elements-color);
     border: 2px solid var(--base-elements-color);
-    border-radius: 5px;
-    color: var(--base-elements-color);
+    border-radius: 0px;
+    color: var(--desired-text-color);
     transition: ease-out 0.2s;
 }
 input[type='text'],input[type='file'],input[type='number'],textarea{
@@ -248,6 +249,7 @@ input[type='email']:focus,input[type='password']:focus,textarea:focus{
     outline: none;
     box-shadow: none;
     background-color: var(--form-elements-color);
+    color: var(--desired-text-color);
 }
 input[type='text']:hover,input[type='search'],input[type='file'],input[type='number']:hover,
 input[type='email']:hover,input[type='password']:hover,textarea:hover{
@@ -282,7 +284,6 @@ input[type="checkbox"] + label::before {
     background-color: var(--form-elements-color);
     color: var(--form-elements-color);
     text-align: center;
-    border-radius: 5px;
     font-weight: bold;
     transition: 0.3s ease;
 }
@@ -326,12 +327,7 @@ input[type="radio"]:checked + label::before {
     color: var(--base-elements-color);
 }
 
-.input-group input[type='text'] {
-    position: relative;
-    flex: 1 1 auto;
-    width: 1%;
-    min-width: 0;
-}
+
 .input-with-btt{
     background-color: var(--form-elements-color);
     border: 2px solid var(--base-elements-color);
@@ -559,7 +555,7 @@ img{
 }
 
 .img_preview{
-    width: 200px;
+    margin-bottom: 5px;
 }
 
 .logo_img{
@@ -803,6 +799,7 @@ input[type='search'].my-base-input {
     box-shadow: -5px 5px 5px -5px black; /* Злитна тінь зліва і внизу (чорна тінь) */
     outline: none; /* Забираємо виділення при фокусі */
     border-radius: 0;
+    color: var(--desired-text-colorss);
 }
 
 input[type='search'].my-base-input::selection,
@@ -846,3 +843,129 @@ input[type='search'].my-base-input::-moz-selection {
     background-color: var(--anti-base-elements-color-transparent);
     color: var(--anti-base-elements-color);
 }
+
+.container-photo{
+    box-sizing: border-box;
+    width: 100%;
+    columns: 4;
+    word-wrap: break-word;
+    break-inside: avoid-column;
+}
+
+.my-row{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+
+.mb-3 {
+    break-inside: avoid-column;
+}
+
+.my-a{
+    margin-bottom: 10px;
+    
+    break-inside: avoid-column;
+}
+
+.my-a:hover{
+    border: 1px solid rgba(0, 0, 0, 0.5); /* Чорна півпрозрачна рамка */
+    box-shadow: -10px 10px 10px -10px black;
+    cursor: pointer;
+}
+
+.img-name{
+    margin: 5px;
+}
+
+.my-card{
+    border: 1px solid rgba(0, 0, 0, 0.5); /* Чорна півпрозрачна рамка */
+    box-shadow: -10px 10px 10px -10px black;
+    margin-left: 100px;
+    margin-right: 100px;
+    color: var(--desired-text-color);
+    word-wrap: break-word;
+    position: relative;
+}
+
+.my-disript{
+    padding: 10px;
+}
+
+.my-card .row {
+    display: flex;
+    flex: 1;
+}
+
+.my-card .row > .col-md-6 {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type='text'].my-required, .my-required{
+    border: 1px solid rgba(0, 0, 0, 0.5); /* Чорна півпрозрачна рамка */
+    box-shadow: 10px 10px 10px -10px black;
+    border-radius: 0;
+    color: var(--desired-text-color);
+}
+
+input[type='text'].my-required:hover, .my-required:hover{
+    box-shadow: none;
+}
+
+.my-btn{
+    box-shadow: 10px 10px 10px -10px black;
+    color: var(--desired-text-color);
+    border-radius: 0;
+}
+
+
+.my-btn-add{
+    width: 100%;
+    height: auto;
+    color: var(--desired-text-color);
+    border-radius: 0;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.5); 
+}
+
+
+.my-px-3{
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+input[type='file'].my-photo{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5); 
+    border-radius: 0px;
+    color: var(--desired-text-color);
+}
+
+input[type='file'].my-photo::file-selector-button {
+    border-right: 1px solid rgba(0, 0, 0, 0.5); 
+    color: var(--desired-text-color);
+}
+
+
+.input-group input[type='text'] {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5); 
+    color: var(--desired-text-color);
+}
+
+.input_box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid rgb(156, 17, 31);
+    margin: 20px 0;
+}
+

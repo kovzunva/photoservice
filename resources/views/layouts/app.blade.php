@@ -17,27 +17,14 @@
             <div class="row">
 
                 <nav class="navbar navbar-expand-lg bg-transparent m-none">
-                    <div class="container-fluid">
-<<<<<<< HEAD
-                     
+                    <div class="container-fluid">   
                         <div class="collapse navbar-collapse justify-content" id="navbarNav">
                         
                             <a class="navbar-brand" href="/"><h1>PhotoPinHub</h1></a>
     
                             <form action="" class="d-flex" role="search" method="GET">
-                                <input class="my-base-input" type="search" name="name" placeholder="Пошук" aria-label="Search">
-=======
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                                <input class="my-base-input" type="search" name="name" placeholder="пошук" aria-label="Search">
 
-                            <a class="navbar-brand" href="/"><h1>Фотосервіс</h1></a>
-
-                            <form action="/search" class="d-flex me-2" role="search" method="GET" >
-                                <input class="base-input me-2" type="search" name="search" placeholder="Пошук" aria-label="Search">
-                                <button class="base-btn" type="submit">Пошук</button>
->>>>>>> 018a9cc4c4b4357ed901b5c43976098d7276b023
                             </form>
 
                             @guest
@@ -78,8 +65,8 @@
     </header>      
 
     <div id="app" class="container py-4">
-        <div class="row">
-            <main class="col-lg-9 col-md-6 col-sm-12">
+        <div class="my-row">
+            <main class="col-12">
                 @yield('content')
             </main>
         </div>

@@ -4,17 +4,22 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+        <div class="my-card p-3">
+                <div class="container text-center">
+                    <h2>Вхід</h2>
+                </div>
 
-                <div class="card-body">
+                <hr>
+
+
+                <div class="text-center">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Ви зареєструвались!') }}
                 </div>
             </div>
         </div>
